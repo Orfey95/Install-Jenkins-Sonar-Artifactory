@@ -1,6 +1,6 @@
 # Install-Jenkins-Sonar-Artifactory
 
-##Install Jenkins script
+## Install Jenkins script
 
 Script parameters:
 1) Jenkins LTS version. Example: 2.176.2
