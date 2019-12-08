@@ -24,7 +24,7 @@ sudo ufw allow 8080
 else echo "Jenkins is already installed"
 fi
 
-# Customize admin user
+# Create admin user
 admin_login=$1
 admin_password=$2
 echo "Admin login will be: $admin_login"
@@ -36,3 +36,6 @@ wget -P $HOME http://localhost:8080/jnlpJars/jenkins-cli.jar
 fi
 temp_pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080" -auth admin:$temp_pass -noKeyAuth groovy = –
+
+# Install Jenkins plugins: Role-Based, Git, Pipeline, BlueOcean
+java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:$temp_pass install-plugin role-strategy git workflow-aggregator blueocean -restart
