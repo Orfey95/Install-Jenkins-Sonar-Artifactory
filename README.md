@@ -1,5 +1,3 @@
-# Install-Jenkins-Sonar-Artifactory
-
 ## Install Jenkins script
 
 Script parameters:
