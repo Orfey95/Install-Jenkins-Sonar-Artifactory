@@ -35,4 +35,4 @@ then
 wget -P $HOME http://localhost:8080/jnlpJars/jenkins-cli.jar
 fi
 temp_pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
-echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080" -auth$
+echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080" -auth admin:$temp_pass -noKeyAuth groovy = –
