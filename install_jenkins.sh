@@ -15,18 +15,29 @@ jenkins_status=$(dpkg -l | grep jenkins)
 if [[ $jenkins_status == "" ]]
 then
 echo "Jenkins is not installed"
+jenkins_LTS=$1
+if [ $# == 0 ]
+then
+echo "You forgot to enter LTS version"
+exit 1
+fi
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt update
-sudo apt install -y jenkins
+sudo apt install -y jenkins=$jenkins_LTS
 sudo systemctl start jenkins
 sudo ufw allow 8080
 else echo "Jenkins is already installed"
 fi
 
 # Create admin user
-admin_login=$1
-admin_password=$2
+admin_login=$2
+admin_password=$3
+if [ $# != 3 ]
+then
+echo "You forgot to enter script parameters (admin login and password)"
+exit 1
+fi
 echo "Admin login will be: $admin_login"
 echo "Admin password will be: $admin_password"
 test -f $HOME/jenkins-cli.jar
