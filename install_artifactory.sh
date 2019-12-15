@@ -12,6 +12,7 @@ fi
 
 # Install Artifactory
 # wget https://bintray.com/artifact/download/jfrog/artifactory-debs/pool/main/j/jfrog-artifactory-oss-deb/jfrog-artifactory-oss-6.16.0.deb
+# sudo wget -O artifactory-oss-6.16.0.zip https://bintray.com/jfrog/artifactory/download_file?file_path=jfrog-artifactory-oss-6.16.0.zip
 sudo wget -c -O - "https://bintray.com/user/downloadSubjectPublicKey?username=jfrog" | sudo apt-key add -
 echo "deb https://bintray.com/artifact/download/jfrog/artifactory-debs trusty main" | sudo tee -a /etc/apt/sources.list.d/artifactory-oss.list
 sudo apt-get update
