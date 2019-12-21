@@ -15,3 +15,23 @@ export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
 source ~/.bashrc
 export PATH=$PATH:$JAVA_HOME/bin
 export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
+# Install support packages
+sudo yum install -y nano wget
+
+# Install the PostgreSQL Repository
+sudo yum install -y https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+
+# Install the PostgreSQL 10 database Server
+sudo yum install -y postgresql10-server postgresql10-contrib
+
+# Initialize the Postgres database
+sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+
+# Change peer to trust and idnet to md5
+sudo sed -i 's/local   all             all                                     peer/local   all             all                                     trust/' /var/lib/pgsql/10/data/pg_hba.conf
+sudo sed -i 's/host    all             all             127.0.0.1/32            ident/host    all             all             127.0.0.1/32            md5/' /var/lib/pgsql/10/data/pg_hba.conf
+sudo sed -i 's/host    all             all             ::1/128                 ident/host    all             all             ::1/128                 md5/' /var/lib/pgsql/10/data/pg_hba.conf
+
+# Start PostgreSQL Database server
+sudo systemctl start postgresql-10
