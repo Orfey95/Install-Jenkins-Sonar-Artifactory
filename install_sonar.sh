@@ -40,7 +40,7 @@ sudo systemctl start postgresql-10
 sudo systemctl enable postgresql-10
 
 # Change the password for the default PostgreSQL user
-echo "123" | sudo passwd postgres --stdin
+# echo "123" | sudo passwd postgres --stdin
 
 # Switch to the postgres user
 sudo su - postgres
