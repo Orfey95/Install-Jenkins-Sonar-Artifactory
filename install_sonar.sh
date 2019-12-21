@@ -43,7 +43,7 @@ sudo systemctl enable postgresql-10
 echo "123" | sudo passwd postgres --stdin
 
 # Switch to the postgres user
-su - postgres
+sudo su - postgres
 
 # Create the sonar user
 createuser sonar
