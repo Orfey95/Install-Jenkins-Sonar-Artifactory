@@ -63,3 +63,13 @@ grant all privileges on sonarqube to sonar;
 # Exit from the psql shell and switch back to the sudo user
 \q
 exit
+
+
+
+sudo su postgres <<EOSU
+createuser sonar
+psql
+ALTER USER sonar WITH ENCRYPTED password 'sonar';
+CREATE DATABASE sonarqube OWNER sonar;
+GRANT ALL PRIVILEGES ON sonarqube TO sonar;
+EOSU
