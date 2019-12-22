@@ -59,4 +59,13 @@ sudo mv /opt/sonarqube-7.9.1 /opt/sonarqube
 # Configure SonarQube
 sudo groupadd sonar
 sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
+echo "1234" | sudo passwd sonar --stdin
 sudo chown -R sonar:sonar /opt/sonarqube
+sudo sed -i 's/#sonar.jdbc.username=/sonar.jdbc.username=sonar/' /opt/sonarqube/conf/sonar.properties
+sudo sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=1234/' /opt/sonarqube/conf/sonar.properties
+sudo sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
+sudo su sonar <<EOSU
+cd /opt/sonar/bin/linux-x86-64/
+./sonar.sh start
+exit;
+EOSU
