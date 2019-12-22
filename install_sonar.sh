@@ -17,7 +17,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
 
 # Install support packages
-sudo yum install -y nano wget
+sudo yum install -y nano wget unzip
 
 # Install the PostgreSQL Repository
 sudo yum install -y https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
@@ -49,3 +49,12 @@ GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 EOSU
 
 # Download and Install SonarQube
+cd /tmp
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
+sudo unzip sonarqube-7.9.1.zip -d /opt
+sudo mv /opt/sonarqube-7.9.1 /opt/sonarqube
+
+# Configure SonarQube
+sudo groupadd sonar
+sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
+sudo chown -R sonar:sonar /opt/sonarqube
