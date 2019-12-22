@@ -47,7 +47,7 @@ ALTER USER sonar WITH ENCRYPTED password 'sonar';
 CREATE DATABASE sonarqube OWNER sonar;
 GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 \q
-#exit;
+exit
 EOSU
 
 # Download and Install SonarQube
