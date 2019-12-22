@@ -71,5 +71,5 @@ createuser sonar
 psql
 ALTER USER sonar WITH ENCRYPTED password 'sonar';
 CREATE DATABASE sonarqube OWNER sonar;
-GRANT ALL PRIVILEGES ON sonarqube TO sonar;
+GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 EOSU
