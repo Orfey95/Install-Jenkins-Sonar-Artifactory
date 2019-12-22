@@ -39,33 +39,7 @@ sudo systemctl start postgresql-10
 # Enable PostgreSQL Database server to start automatically at System Startup
 sudo systemctl enable postgresql-10
 
-# Change the password for the default PostgreSQL user
-# echo "123" | sudo passwd postgres --stdin
-
-# Switch to the postgres user
-sudo su - postgres
-
-# Create the sonar user
-createuser sonar
-
-# Switch to the PostgreSQL shell
-psql
-
-# Set a password for the newly created user for SonarQube database
-ALTER USER sonar WITH ENCRYPTED password 'sonar';
-
-# Create a new database for PostgreSQL database by running
-CREATE DATABASE sonarqube OWNER sonar;
-
-# Grant all privileges to sonar user on sonarqube Database
-grant all privileges on sonarqube to sonar;
-
-# Exit from the psql shell and switch back to the sudo user
-\q
-exit
-
-
-
+# Work with PostgreSQL Database server
 sudo su postgres <<EOSU
 createuser sonar
 psql
@@ -73,3 +47,5 @@ ALTER USER sonar WITH ENCRYPTED password 'sonar';
 CREATE DATABASE sonarqube OWNER sonar;
 GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 EOSU
+
+# Download and Install SonarQube
