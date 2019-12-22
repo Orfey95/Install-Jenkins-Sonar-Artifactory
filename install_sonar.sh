@@ -65,7 +65,34 @@ sudo sed -i 's/#sonar.jdbc.username=/sonar.jdbc.username=sonar/' /opt/sonarqube/
 sudo sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=1234/' /opt/sonarqube/conf/sonar.properties
 sudo sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
 sudo su sonar <<EOSU
-cd /opt/sonar/bin/linux-x86-64/
+cd /opt/sonarqube/bin/linux-x86-64/
 ./sonar.sh start
 exit;
 EOSU
+
+# Configure Systemd service
+sudo sh -c 'cat > /etc/systemd/system/sonar.service' <<EOF
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+
+User=sonar
+Group=sonar
+Restart=always
+
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start Sonar as service
+sudo systemctl start sonar
+sudo systemctl enable sonar
