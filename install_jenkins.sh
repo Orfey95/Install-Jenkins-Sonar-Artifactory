@@ -51,5 +51,8 @@ echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login',
 # Install Jenkins plugins: Role-Based, Git, Pipeline, BlueOcean, BackUp, SonarQube, Artifactory
 java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:$temp_pass install-plugin role-strategy git workflow-aggregator blueocean backup sonar artifactory -restart
 
+# Disables the setup wizard & the admin user stuff
+java -Djenkins.install.runSetupWizard=false -jar jenkins.war
+
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
