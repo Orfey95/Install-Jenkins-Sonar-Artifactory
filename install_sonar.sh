@@ -58,24 +58,26 @@ exit;
 EOSU
 
 # Download and Install SonarQube
-cd /tmp
+#cd /tmp
 wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
-unzip sonarqube-7.9.1.zip -d /opt
+unzip sonarqube-7.9.1.zip -d /opt > /dev/null
 mv /opt/sonarqube-7.9.1 /opt/sonarqube
 
 # Configure SonarQube
-groupadd sonar
-useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
-echo "1234" | passwd sonar --stdin
-chown -R sonar:sonar /opt/sonarqube
+#groupadd sonar
+#useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
+#echo "1234" | passwd sonar --stdin
+#chown -R sonar:sonar /opt/sonarqube
 sed -i 's/#sonar.jdbc.username=/sonar.jdbc.username=sonar/' /opt/sonarqube/conf/sonar.properties
 sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=1234/' /opt/sonarqube/conf/sonar.properties
-sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
-su sonar <<EOSU
-cd /opt/sonarqube/bin/linux-x86-64/
-./sonar.sh start
-exit;
-EOSU
+sed -i 's/#sonar.jdbc.url=jdbc:postgresql/sonar.jdbc.url=jdbc:postgresql/' /opt/sonarqube/conf/sonar.properties
+#sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
+
+#su sonar <<EOSU
+#cd /opt/sonarqube/bin/linux-x86-64/
+#./sonar.sh start
+#exit;
+#EOSU
 
 # Configure Systemd service
 sh -c 'cat > /etc/systemd/system/sonar.service' <<EOF
