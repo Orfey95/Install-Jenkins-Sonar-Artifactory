@@ -64,14 +64,26 @@ unzip sonarqube-7.9.1.zip -d /opt > /dev/null
 mv /opt/sonarqube-7.9.1 /opt/sonarqube
 
 # Configure SonarQube
-#groupadd sonar
-#useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
-#echo "1234" | passwd sonar --stdin
-#chown -R sonar:sonar /opt/sonarqube
+groupadd sonar
+useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar 
+echo "sonar" | passwd sonar --stdin
+chown -R sonar:sonar /opt/sonarqube
+mkdir -p /var/sonarqube/data
+mkdir -p /var/sonarqube/temp
+chown -R sonar:sonar /var/sonarqube
+
+# Configuration /opt/sonarqube/conf/sonar.properties
 sed -i 's/#sonar.jdbc.username=/sonar.jdbc.username=sonar/' /opt/sonarqube/conf/sonar.properties
-sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=1234/' /opt/sonarqube/conf/sonar.properties
-sed -i 's/#sonar.jdbc.url=jdbc:postgresql/sonar.jdbc.url=jdbc:postgresql/' /opt/sonarqube/conf/sonar.properties
+sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=sonar/' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my_schema!sonar.jdbc.url=jdbc:postgresql://localhost/sonar!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.web.host=0.0.0.0!sonar.web.host=127.0.0.1!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.web.port=9000!sonar.web.port=9000!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError!sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.search.javaOpts=-Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError!sonar.search.javaOpts=-Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.path.data=data!sonar.path.data=data!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.path.temp=temp!sonar.path.temp=temp!' /opt/sonarqube/conf/sonar.properties
 #sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
+
 
 #su sonar <<EOSU
 #cd /opt/sonarqube/bin/linux-x86-64/
@@ -103,5 +115,7 @@ WantedBy=multi-user.target
 EOF
 
 # Start Sonar as service
-systemctl start sonar
-systemctl status sonar
+systemctl daemon-reload
+systemctl enable sonarqube.service
+systemctl start sonarqube.service
+systemctl status sonarqube.service
