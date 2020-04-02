@@ -2,6 +2,9 @@
 
 # Install Sonar in Centos 7
 
+# Turn on logging
+set -x
+
 # Check Java
 java_status=$(sudo rpm -qa | grep java)
 if [[ $java_status == "" ]]
