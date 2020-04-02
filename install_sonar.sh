@@ -116,6 +116,6 @@ EOF
 
 # Start Sonar as service
 systemctl daemon-reload
-systemctl enable sonarqube.service
-systemctl start sonarqube.service
-systemctl status sonarqube.service
+systemctl enable sonar
+systemctl start sonar
+systemctl status sonar
