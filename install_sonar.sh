@@ -10,7 +10,7 @@ java_status=$(sudo rpm -qa | grep java)
 if [[ $java_status == "" ]]
 then
 echo "Java is not installed"
-yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
+yum install -y java-11-openjdk-devel
 else echo "Java is already installed"
 fi
 
