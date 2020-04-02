@@ -47,7 +47,7 @@ systemctl enable postgresql-10
 systemctl status postgresql-10
 
 # Work with PostgreSQL Database server
-su postgres <<EOSU
+su - postgres <<EOSU
 createuser sonar
 psql
 ALTER USER sonar WITH ENCRYPTED password 'sonar';
