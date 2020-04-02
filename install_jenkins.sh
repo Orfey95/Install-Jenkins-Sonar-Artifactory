@@ -1,12 +1,17 @@
 #!/bin/bash
+
 # Install Jenkins in Ubuntu 18.04
+
+# Turn on logging
+set -x
 
 # Check Java
 java_status=$(dpkg -l | grep java)
 if [[ $java_status == "" ]]
 then
 echo "Java is not installed"
-sudo apt install -y openjdk-8-jre-headless
+apt update
+apt install -y openjdk-8-jre-headless
 else echo "Java is already installed"
 fi
 
@@ -21,12 +26,13 @@ then
 echo "You forgot to enter LTS version"
 exit 1
 fi
-wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt update
-sudo apt install -y jenkins=$jenkins_LTS
-sudo systemctl start jenkins
-sudo ufw allow 8080
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+apt update
+apt install -y jenkins=$jenkins_LTS
+systemctl start jenkins
+systemctl enable jenkins
+systemctl status jenkins
 else echo "Jenkins is already installed"
 fi
 
@@ -50,9 +56,6 @@ echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login',
 
 # Install Jenkins plugins: Role-Based, Git, Pipeline, BlueOcean, BackUp, SonarQube, Artifactory
 java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:$temp_pass install-plugin role-strategy git workflow-aggregator blueocean backup sonar artifactory -restart
-
-# Disables the setup wizard & the admin user stuff
-java -Djenkins.install.runSetupWizard=false -jar jenkins.war
 
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
