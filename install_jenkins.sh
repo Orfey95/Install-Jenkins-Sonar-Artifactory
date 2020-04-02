@@ -64,6 +64,7 @@ backup /
 sonar /
 artifactory /
 locale /
+maven-plugin /
 -restart
 
 # Remove jenkins cli
