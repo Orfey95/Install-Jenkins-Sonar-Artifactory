@@ -8,5 +8,5 @@ Script parameters:
 Script example:
 
 ```
-sasha@network:~$ ./install_jenkins 2.176.2 sasha 1234
+sasha@network:~$ ./install_jenkins 2.222.1 sasha 1234
 ```
