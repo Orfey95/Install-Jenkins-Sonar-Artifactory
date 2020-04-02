@@ -55,7 +55,16 @@ temp_pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080" -auth admin:$temp_pass -noKeyAuth groovy = –
 
 # Install Jenkins plugins: Role-Based, Git, Pipeline, BlueOcean, BackUp, SonarQube, Artifactory
-java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:$temp_pass install-plugin role-strategy git workflow-aggregator blueocean backup sonar artifactory -restart
+java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:$temp_pass install-plugin /
+role-strategy /
+git /
+workflow-aggregator /
+blueocean /
+backup /
+sonar /
+artifactory /
+locale /
+-restart
 
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
