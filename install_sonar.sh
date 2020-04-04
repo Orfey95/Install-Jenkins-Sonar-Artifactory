@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Sonar in Centos 7
+# Install Sonar on Centos 7
 
 # Turn on logging
 set -x
@@ -19,6 +19,11 @@ fi
 #source ~/.bashrc
 #export PATH=$PATH:$JAVA_HOME/bin
 #export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
+echo "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile
+echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile
+echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile
+source /etc/profile
 
 # Install support packages
 yum install -y nano wget unzip
@@ -52,12 +57,12 @@ createuser sonar
 psql
 ALTER USER sonar WITH ENCRYPTED password 'sonar';
 CREATE DATABASE sonarqube OWNER sonar;
+GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 \q
 exit;
 EOSU
 
 # Download and Install SonarQube
-#cd /tmp
 wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.1.zip
 unzip sonarqube-7.9.1.zip -d /opt > /dev/null
 mv /opt/sonarqube-7.9.1 /opt/sonarqube
@@ -74,14 +79,14 @@ chown -R sonar:sonar /var/sonarqube
 # Configuration /opt/sonarqube/conf/sonar.properties
 sed -i 's/#sonar.jdbc.username=/sonar.jdbc.username=sonar/' /opt/sonarqube/conf/sonar.properties
 sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=sonar/' /opt/sonarqube/conf/sonar.properties
-sed -i 's!#sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my_schema!sonar.jdbc.url=jdbc:postgresql://localhost/sonar!' /opt/sonarqube/conf/sonar.properties
+sed -i 's!#sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my_schema!sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube!' /opt/sonarqube/conf/sonar.properties
 #sed -i 's!#sonar.web.host=0.0.0.0!sonar.web.host=127.0.0.1!' /opt/sonarqube/conf/sonar.properties
 #sed -i 's!#sonar.web.port=9000!sonar.web.port=9000!' /opt/sonarqube/conf/sonar.properties
 #sed -i 's!#sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError!sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError!' /opt/sonarqube/conf/sonar.properties
 #sed -i 's!#sonar.search.javaOpts=-Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError!sonar.search.javaOpts=-Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError!' /opt/sonarqube/conf/sonar.properties
 sed -i 's!#sonar.path.data=data!sonar.path.data=data!' /opt/sonarqube/conf/sonar.properties
 sed -i 's!#sonar.path.temp=temp!sonar.path.temp=temp!' /opt/sonarqube/conf/sonar.properties
-#sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
+sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
 
 
 #su sonar <<EOSU
