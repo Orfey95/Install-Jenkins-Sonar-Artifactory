@@ -52,7 +52,6 @@ createuser sonar
 psql
 ALTER USER sonar WITH ENCRYPTED password 'sonar';
 CREATE DATABASE sonarqube OWNER sonar;
-#GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 \q
 exit;
 EOSU
@@ -98,7 +97,7 @@ Description=SonarQube service
 After=syslog.target network.target
 
 [Service]
-Type=forking
+Type=simple
 
 ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
 ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
