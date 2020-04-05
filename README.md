@@ -20,7 +20,7 @@ List of plugins:
 - artifactory (for work with Artifactory);
 - locale (for Jenkins localization);
 - maven-plugin (for work with Maven).
-## Install Sonar(v7.9.1) on CentOS 7
+## Install Sonar(v7.9.1) with PostgreSQL on CentOS 7
 Script example:
 ```
 sasha@network:~$ sudo bash install_sonar.sh
