@@ -38,7 +38,7 @@ systemctl status artifactory
 
 # Set admin password
 admin_password=$1
-curl -XPATCH -uadmin:password http://localhost:8081/access/api/v1/users/admin -H "Content-Type: application/json" -d '{ "password": "$admin_password" }'
+curl -XPATCH -uadmin:password http://localhost:8081/access/api/v1/users/admin -H "Content-Type: application/json" -d '{ "password": "'"$admin_password"'" }'
 
 # Install Artifactory CLI
 curl -fL https://getcli.jfrog.io | sh
