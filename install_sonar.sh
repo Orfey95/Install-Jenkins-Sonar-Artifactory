@@ -14,6 +14,7 @@ yum install -y java-11-openjdk-devel
 else echo "Java is already installed"
 fi
 
+# Set JAVA_HOME
 echo "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile
 echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile
@@ -77,13 +78,6 @@ sed -i 's!#sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my
 sed -i 's!#sonar.path.data=data!sonar.path.data=data!' /opt/sonarqube/conf/sonar.properties
 sed -i 's!#sonar.path.temp=temp!sonar.path.temp=temp!' /opt/sonarqube/conf/sonar.properties
 sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
-
-
-#su sonar <<EOSU
-#cd /opt/sonarqube/bin/linux-x86-64/
-#./sonar.sh start
-#exit;
-#EOSU
 
 # Configure Systemd service
 sh -c 'cat > /etc/systemd/system/sonar.service' <<EOF
