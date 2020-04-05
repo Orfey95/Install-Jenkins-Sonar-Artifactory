@@ -33,8 +33,7 @@ else echo "Java is already installed"
 fi
 
 # Set admin password
-echo "access-admin@127.0.0.1=123456789" > /opt/jfrog/artifactory/var/etc/access/bootstrap.creds
-chmod 600 /opt/jfrog/artifactory/var/etc/access/bootstrap.creds
+curl -XPATCH -uaccess-admin:password http://localhost:8040/access/api/v1/users/admin -H "Content-Type: application/json" -d '{ "password": "12345678" }'
 
 # Start Artifactory
 systemctl start artifactory
