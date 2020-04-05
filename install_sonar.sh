@@ -14,12 +14,6 @@ yum install -y java-11-openjdk-devel
 else echo "Java is already installed"
 fi
 
-# Set JAVA_HOME
-#export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
-#source ~/.bashrc
-#export PATH=$PATH:$JAVA_HOME/bin
-#export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
-
 echo "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile
 echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile
@@ -80,10 +74,6 @@ chown -R sonar:sonar /var/sonarqube
 sed -i 's/#sonar.jdbc.username=/sonar.jdbc.username=sonar/' /opt/sonarqube/conf/sonar.properties
 sed -i 's/#sonar.jdbc.password=/sonar.jdbc.password=sonar/' /opt/sonarqube/conf/sonar.properties
 sed -i 's!#sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my_schema!sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube!' /opt/sonarqube/conf/sonar.properties
-#sed -i 's!#sonar.web.host=0.0.0.0!sonar.web.host=127.0.0.1!' /opt/sonarqube/conf/sonar.properties
-#sed -i 's!#sonar.web.port=9000!sonar.web.port=9000!' /opt/sonarqube/conf/sonar.properties
-#sed -i 's!#sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError!sonar.web.javaOpts=-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError!' /opt/sonarqube/conf/sonar.properties
-#sed -i 's!#sonar.search.javaOpts=-Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError!sonar.search.javaOpts=-Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError!' /opt/sonarqube/conf/sonar.properties
 sed -i 's!#sonar.path.data=data!sonar.path.data=data!' /opt/sonarqube/conf/sonar.properties
 sed -i 's!#sonar.path.temp=temp!sonar.path.temp=temp!' /opt/sonarqube/conf/sonar.properties
 sed -i 's/#RUN_AS_USER=/RUN_AS_USER=sonar/' /opt/sonarqube/bin/linux-x86-64/sonar.sh
@@ -118,8 +108,21 @@ LimitNPROC=4096
 WantedBy=multi-user.target
 EOF
 
+# Increase the limits
+echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
+echo "fs.file-max = 65536" >> /etc/sysctl.conf
+echo "sonar   -   nofile   65536" >> /etc/security/limits.d/99-sonarqube.conf
+echo "sonar   -   nproc    2048" >> /etc/security/limits.d/99-sonarqube.conf
+
+# Disable SELinux
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
+
 # Start Sonar as service
 systemctl daemon-reload
-systemctl enable sonar
 systemctl start sonar
+systemctl enable sonar
 systemctl status sonar
+
+# Reboot
+reboot
+
