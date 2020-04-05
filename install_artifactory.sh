@@ -32,12 +32,13 @@ yum -y install jfrog-artifactory-oss wget
 else echo "Java is already installed"
 fi
 
-# Set admin password
-curl -XPATCH -uaccess-admin:password http://localhost:8040/access/api/v1/users/admin -H "Content-Type: application/json" -d '{ "password": "12345678" }'
-
 # Start Artifactory
 systemctl start artifactory
 systemctl status artifactory
+
+# Set admin password
+admin_password=$1
+curl -XPATCH -uadmin:password http://localhost:8081/access/api/v1/users/admin -H "Content-Type: application/json" -d '{ "password": "$admin_password" }'
 
 # Install Artifactory CLI
 curl -fL https://getcli.jfrog.io | sh
