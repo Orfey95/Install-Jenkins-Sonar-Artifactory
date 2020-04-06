@@ -49,8 +49,7 @@ echo "Admin password will be: $admin_password"
 test -f $HOME/jenkins-cli.jar
 if [ $? == 1 ]
 then
-sleep 5
-wget --retry-connrefused --waitretry=10 --read-timeout=10 --timeout=10 -t 0 -P $HOME http://localhost:8080/jnlpJars/jenkins-cli.jar
+wget --retry-connrefused --waitretry=10 --read-timeout=10 --timeout=10 -t 0 --retry-on-http-error=503 -P $HOME http://localhost:8080/jnlpJars/jenkins-cli.jar
 fi
 temp_pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080" -auth admin:$temp_pass -noKeyAuth groovy = –
