@@ -70,6 +70,8 @@ maven-plugin \
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
 
+su jenkins
+
 # Sonar integration
 echo "<?xml version='1.1' encoding='UTF-8'?>
 <hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.11">
@@ -125,8 +127,8 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
       <connectionRetry>3</connectionRetry>
       <deploymentThreads>3</deploymentThreads>
       <deployerCredentialsConfig>
-        <username>{AQAAABAAAAAQyhkXUEnzDT8HEV3sqs5i4C3leOPdQdzl8X5fyPtokD4=}</username>
-        <password>{AQAAABAAAAAQgOpJTGswsL/7Hv6KcuFxrQ4PfkmhtOWh4Zl0DJA/L6A=}</password>
+        <username>admin</username>
+        <password>-</password>
         <credentialsId></credentialsId>
         <overridingCredentials>false</overridingCredentials>
         <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
@@ -135,6 +137,6 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
   </artifactoryServers>
 </org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>" > /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
 
-chown -R jenkins:jenkins /var/lib/jenkins
+exit
 
 systemctl restart jenkins
