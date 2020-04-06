@@ -111,3 +111,26 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
     </hudson.plugins.sonar.SonarRunnerInstallation>
   </installations>
 </hudson.plugins.sonar.SonarRunnerInstallation_-DescriptorImpl>" > /var/lib/jenkins/hudson.plugins.sonar.SonarRunnerInstallation.xml
+
+# Artifactory integration
+echo "<?xml version='1.1' encoding='UTF-8'?>
+<org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl plugin="artifactory@3.6.1">
+  <useCredentialsPlugin>false</useCredentialsPlugin>
+  <artifactoryServers>
+    <org.jfrog.hudson.ArtifactoryServer>
+      <url>https://10.10.10.10:8081</url>
+      <id>maven-rep</id>
+      <timeout>300</timeout>
+      <bypassProxy>false</bypassProxy>
+      <connectionRetry>3</connectionRetry>
+      <deploymentThreads>3</deploymentThreads>
+      <deployerCredentialsConfig>
+        <username>{AQAAABAAAAAQyhkXUEnzDT8HEV3sqs5i4C3leOPdQdzl8X5fyPtokD4=}</username>
+        <password>{AQAAABAAAAAQgOpJTGswsL/7Hv6KcuFxrQ4PfkmhtOWh4Zl0DJA/L6A=}</password>
+        <credentialsId></credentialsId>
+        <overridingCredentials>false</overridingCredentials>
+        <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
+      </deployerCredentialsConfig>
+    </org.jfrog.hudson.ArtifactoryServer>
+  </artifactoryServers>
+</org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>" > /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
