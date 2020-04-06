@@ -69,3 +69,30 @@ maven-plugin \
 
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
+
+# Sonar integration
+echo "<?xml version='1.1' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.11">
+  <jenkinsSupplier class="hudson.plugins.sonar.SonarGlobalConfiguration$$Lambda$89/1078881955"/>
+  <installations/>
+  <buildWrapperEnabled>false</buildWrapperEnabled>
+  <dataMigrated>true</dataMigrated>
+  <credentialsMigrated>true</credentialsMigrated>
+</hudson.plugins.sonar.SonarGlobalConfiguration>" > /var/lib/jenkins/hudson.plugins.sonar.SonarGlobalConfiguration.xml
+echo "<?xml version='1.1' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarRunnerInstallation_-DescriptorImpl plugin="sonar@2.11">
+  <installations>
+    <hudson.plugins.sonar.SonarRunnerInstallation>
+      <name>http://10.23.26.31:9000/</name>
+      <properties>
+        <hudson.tools.InstallSourceProperty>
+          <installers>
+            <hudson.plugins.sonar.SonarRunnerInstaller>
+              <id>4.3.0.2102</id>
+            </hudson.plugins.sonar.SonarRunnerInstaller>
+          </installers>
+        </hudson.tools.InstallSourceProperty>
+      </properties>
+    </hudson.plugins.sonar.SonarRunnerInstallation>
+  </installations>
+</hudson.plugins.sonar.SonarRunnerInstallation_-DescriptorImpl>" > /var/lib/jenkins/hudson.plugins.sonar.SonarRunnerInstallation.xml
