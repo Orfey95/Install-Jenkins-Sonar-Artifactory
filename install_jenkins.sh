@@ -70,7 +70,7 @@ maven-plugin \
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
 
-su jenkins
+su jenkins <<EOSU
 
 # Sonar integration
 echo "<?xml version='1.1' encoding='UTF-8'?>
@@ -137,6 +137,7 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
   </artifactoryServers>
 </org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>" > /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
 
-exit
+exit;
+EOSU
 
 systemctl restart jenkins
