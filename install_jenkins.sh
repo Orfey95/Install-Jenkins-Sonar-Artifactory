@@ -73,8 +73,23 @@ rm $HOME/jenkins-cli.jar
 # Sonar integration
 echo "<?xml version='1.1' encoding='UTF-8'?>
 <hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.11">
-  <jenkinsSupplier class="hudson.plugins.sonar.SonarGlobalConfiguration$$Lambda$89/1078881955"/>
-  <installations/>
+  <jenkinsSupplier class="hudson.plugins.sonar.SonarGlobalConfiguration$$Lambda$106/1934640915"/>
+  <installations>
+    <hudson.plugins.sonar.SonarInstallation>
+      <name>my-sonar</name>
+      <serverUrl>http://10.10.10.42:9000</serverUrl>
+      <credentialsId></credentialsId>
+      <webhookSecretId></webhookSecretId>
+      <mojoVersion></mojoVersion>
+      <additionalProperties></additionalProperties>
+      <additionalAnalysisProperties></additionalAnalysisProperties>
+      <triggers>
+        <skipScmCause>false</skipScmCause>
+        <skipUpstreamCause>false</skipUpstreamCause>
+        <envVar></envVar>
+      </triggers>
+    </hudson.plugins.sonar.SonarInstallation>
+  </installations>
   <buildWrapperEnabled>false</buildWrapperEnabled>
   <dataMigrated>true</dataMigrated>
   <credentialsMigrated>true</credentialsMigrated>
@@ -83,7 +98,7 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
 <hudson.plugins.sonar.SonarRunnerInstallation_-DescriptorImpl plugin="sonar@2.11">
   <installations>
     <hudson.plugins.sonar.SonarRunnerInstallation>
-      <name>http://10.23.26.31:9000/</name>
+      <name>my-sonar</name>
       <properties>
         <hudson.tools.InstallSourceProperty>
           <installers>
