@@ -134,3 +134,5 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
     </org.jfrog.hudson.ArtifactoryServer>
   </artifactoryServers>
 </org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>" > /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
+
+systemctl restart jenkins
