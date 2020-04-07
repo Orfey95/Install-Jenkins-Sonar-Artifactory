@@ -70,7 +70,7 @@ maven-plugin \
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
 
-su jenkins <<EOSU
+# Upload config.xml
 
 # Sonar integration
 
