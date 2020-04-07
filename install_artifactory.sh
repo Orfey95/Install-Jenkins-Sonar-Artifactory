@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Artifactory in Centos 7
+# Install Artifactory on Centos 7
 
 # Turn on logging
 set -x
