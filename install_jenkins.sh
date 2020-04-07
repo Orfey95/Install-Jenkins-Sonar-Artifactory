@@ -70,4 +70,34 @@ maven-plugin \
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
 
+# Integration Sonar and Artifactory
+#Variables
+sonar_ip=$4
+sonar_name=$5
+artifactory_ip=$6
+artifactory_name=$7
 
+rm /var/lib/jenkins/config.xml
+wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/jenkins/config.xml -P /var/lib/jenkins
+sed -i 's!<version>[0-9.]\+</version>!<version>replace_it</version>!' /var/lib/jenkins/config.xml
+sed -i "s/replace_it/$jenkins_LTS/" /var/lib/jenkins/config.xml
+
+rm /var/lib/jenkins/credentials.xml
+wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/jenkins/credentials.xml -P /var/lib/jenkins
+
+wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/jenkins/hudson.plugins.sonar.SonarGlobalConfiguration.xml -P /var/lib/jenkins
+sed -i "s/replace_ip/$sonar_ip/" /var/lib/jenkins/hudson.plugins.sonar.SonarGlobalConfiguration.xml
+sed -i "s/replace_name/$sonar_name/" /var/lib/jenkins/hudson.plugins.sonar.SonarGlobalConfiguration.xml
+
+wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/jenkins/hudson.plugins.sonar.SonarRunnerInstallation.xml -P /var/lib/jenkins
+sed -i "s/replace_name/$sonar_name/" /var/lib/jenkins/hudson.plugins.sonar.SonarRunnerInstallation.xml
+
+wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml -P /var/lib/jenkins
+sed -i "s/replace_ip/$artifactory_ip/" /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
+sed -i "s/replace_name/$artifactory_name/" /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
+
+# Change owner
+chown -R jenkins:jenkins /var/lib/jenkins
+
+# Restart Jenkins
+systemctl restart jenkins
