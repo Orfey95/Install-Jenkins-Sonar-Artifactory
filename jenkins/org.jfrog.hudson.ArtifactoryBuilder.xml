@@ -8,14 +8,7 @@
       <timeout>300</timeout>
       <bypassProxy>false</bypassProxy>
       <connectionRetry>3</connectionRetry>
-      <deploymentThreads>3</deploymentThreads>
-      <deployerCredentialsConfig>
-        <username>{AQAAABAAAAAQsoWWc8rw6VpJIkH6N+iDP55byLXTjdvzHAbuDjpkGRQ=}</username>
-        <password>{AQAAABAAAAAQeXlqBQi4QuGnsBxFNprUYAbksKFuqSJ14Wsr3uJGk74=}</password>
-        <credentialsId>1e903af3-483a-4706-a46a-a77e5bdd828e</credentialsId>
-        <overridingCredentials>false</overridingCredentials>
-        <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
-      </deployerCredentialsConfig>
+      <deploymentThreads>3</deploymentThreads>      
     </org.jfrog.hudson.ArtifactoryServer>
   </artifactoryServers>
 </org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>
