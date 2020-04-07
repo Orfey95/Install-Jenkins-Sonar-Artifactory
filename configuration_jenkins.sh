@@ -10,6 +10,7 @@ jenkins_LTS=$1
 sonar_ip=$2
 sonar_name=$3
 artifactory_ip=$4
+artifactory_name=$5
 
 ####################################### config.xml ################################################
 echo "<?xml version='1.1' encoding='UTF-8'?>
@@ -106,8 +107,8 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
   <useCredentialsPlugin>true</useCredentialsPlugin>
   <artifactoryServers>
     <org.jfrog.hudson.ArtifactoryServer>
-      <url>https://1.2.3.4:8081</url>
-      <id>my_artifactory</id>
+      <url>https://$artifactory_ip:8081</url>
+      <id>$artifactory_name</id>
       <timeout>300</timeout>
       <bypassProxy>false</bypassProxy>
       <connectionRetry>3</connectionRetry>
