@@ -70,10 +70,4 @@ maven-plugin \
 # Remove jenkins cli
 rm $HOME/jenkins-cli.jar
 
-# Upload config.xml
 
-# Sonar integration
-
-# Artifactory integration
-
-systemctl restart jenkins
