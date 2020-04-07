@@ -121,4 +121,4 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
 chown -R jenkins:jenkins /var/lib/jenkins
 
 # Restart Jenkins
-systemctl restart Jenkins
+systemctl restart jenkins
