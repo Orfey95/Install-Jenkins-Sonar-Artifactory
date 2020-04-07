@@ -4,6 +4,10 @@ Script parameters:
 1) Jenkins LTS version. Example: 2.222.1
 2) Admin login. Example: sasha
 3) Admin password. Example: 1234
+4) Sonar IP address. Example: 10.20.30.40
+5) Sonar name. Example: my-sonar
+6) Artifactory IP address. Example: 40.30.20.10
+7) Artifactory name. Example: my-artifactory
 
 Script example:
 
