@@ -8,7 +8,7 @@ Script parameters:
 Script example:
 
 ```
-sasha@network:~$ sudo bash install_jenkins 2.222.1 sasha 1234
+sasha@network:~$ sudo bash install_jenkins 2.222.1 sasha 1234 my-sonar 10.20.30.40 my-artifactory 40.30.20.10
 ```
 List of plugins:
 - role-strategy (for role management);
