@@ -3,8 +3,8 @@
   <jenkinsSupplier class="hudson.plugins.sonar.SonarGlobalConfiguration$$Lambda$90/492572393"/>
   <installations>
     <hudson.plugins.sonar.SonarInstallation>
-      <name>my-sonar</name>
-      <serverUrl>https://1.2.3.4:9000</serverUrl>
+      <name>replace_name</name>
+      <serverUrl>https://replace_ip:9000</serverUrl>
       <credentialsId></credentialsId>
       <webhookSecretId></webhookSecretId>
       <mojoVersion></mojoVersion>
