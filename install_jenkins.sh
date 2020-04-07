@@ -39,7 +39,7 @@ fi
 # Create admin user
 admin_login=$2
 admin_password=$3
-if [ $# != 3 ]
+if [ $# != 7 ]
 then
 echo "You forgot to enter script parameters (admin login and password)"
 exit 1
