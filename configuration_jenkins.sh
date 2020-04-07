@@ -40,7 +40,7 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
   <views>
     <hudson.model.AllView>
-      <owner class="hudson" reference="../../.."/>
+      <owner class="hudson" reference=\"../../..\"/>
       <name>all</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
