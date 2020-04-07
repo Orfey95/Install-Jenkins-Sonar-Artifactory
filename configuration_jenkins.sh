@@ -57,7 +57,8 @@ echo '<?xml version='1.1' encoding='UTF-8'?>
   <globalNodeProperties/>
 </hudson>' > /var/lib/jenkins/config.xml
 
-sed  "s!<version>[0-9.]+</version>!<version>$jenkins_LTS</version>!" /var/lib/jenkins/config.xml
+sed -i 's!<version>[0-9.]\+</version>!<version>replace_it</version>!' /var/lib/jenkins/config.xml
+sed -i "s/replace_it/$jenkins_LTS/" /var/lib/jenkins/config.xml
 
 ###################################### hudson.plugins.sonar.SonarGlobalConfiguration.xml ##################
 echo "<?xml version='1.1' encoding='UTF-8'?>
