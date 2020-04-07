@@ -12,7 +12,7 @@ Script parameters:
 Script example:
 
 ```
-sasha@network:~$ sudo bash install_jenkins 2.222.1 sasha 1234 10.20.30.40 my-sonar 40.30.20.10 my-artifactory
+sasha@network:~$ sudo bash install_jenkins.sh 2.222.1 sasha 1234 10.20.30.40 my-sonar 40.30.20.10 my-artifactory
 ```
 List of plugins:
 - role-strategy (for role management);
@@ -35,5 +35,5 @@ Script parameters:
 
 Script example:
 ```
-sasha@network:~$ sudo bash install_artifactory 12345678
+sasha@network:~$ sudo bash install_artifactory.sh 12345678
 ```
