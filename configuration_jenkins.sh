@@ -13,10 +13,10 @@ artifactory_ip=$4
 artifactory_name=$5
 
 ####################################### config.xml ################################################
-echo "<?xml version='1.1' encoding='UTF-8'?>
+echo '<?xml version='1.1' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>$jenkins_LTS</version>
+  <version>2.222</version>
   <installStateName>NEW</installStateName>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
@@ -55,7 +55,9 @@ echo "<?xml version='1.1' encoding='UTF-8'?>
   </crumbIssuer>
   <nodeProperties/>
   <globalNodeProperties/>
-</hudson>" > /var/lib/jenkins/config.xml
+</hudson>' > /var/lib/jenkins/config.xml
+
+sed  "s!<version>[0-9.]+</version>!<version>$jenkins_LTS</version>!" /var/lib/jenkins/config.xml
 
 ###################################### hudson.plugins.sonar.SonarGlobalConfiguration.xml ##################
 echo "<?xml version='1.1' encoding='UTF-8'?>
