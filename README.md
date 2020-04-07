@@ -25,3 +25,9 @@ Script example:
 ```
 sasha@network:~$ sudo bash install_sonar.sh
 ```
+## Install Artifactory
+Script parameters:
+1) Admin password. Example: 12345678
+```
+sasha@network:~$ sudo bash install_artifactory 12345678
+```
