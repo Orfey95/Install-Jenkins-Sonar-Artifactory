@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Jenkins in Ubuntu 18.04
+# Install Jenkins on Ubuntu 18.04
 
 # Turn on logging
 set -x
@@ -73,71 +73,7 @@ rm $HOME/jenkins-cli.jar
 su jenkins <<EOSU
 
 # Sonar integration
-echo "<?xml version='1.1' encoding='UTF-8'?>
-<hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.11">
-  <jenkinsSupplier class="hudson.plugins.sonar.SonarGlobalConfiguration$$Lambda$106/1934640915"/>
-  <installations>
-    <hudson.plugins.sonar.SonarInstallation>
-      <name>my-sonar</name>
-      <serverUrl>http://10.10.10.42:9000</serverUrl>
-      <credentialsId></credentialsId>
-      <webhookSecretId></webhookSecretId>
-      <mojoVersion></mojoVersion>
-      <additionalProperties></additionalProperties>
-      <additionalAnalysisProperties></additionalAnalysisProperties>
-      <triggers>
-        <skipScmCause>false</skipScmCause>
-        <skipUpstreamCause>false</skipUpstreamCause>
-        <envVar></envVar>
-      </triggers>
-    </hudson.plugins.sonar.SonarInstallation>
-  </installations>
-  <buildWrapperEnabled>false</buildWrapperEnabled>
-  <dataMigrated>true</dataMigrated>
-  <credentialsMigrated>true</credentialsMigrated>
-</hudson.plugins.sonar.SonarGlobalConfiguration>" > /var/lib/jenkins/hudson.plugins.sonar.SonarGlobalConfiguration.xml
-echo "<?xml version='1.1' encoding='UTF-8'?>
-<hudson.plugins.sonar.SonarRunnerInstallation_-DescriptorImpl plugin="sonar@2.11">
-  <installations>
-    <hudson.plugins.sonar.SonarRunnerInstallation>
-      <name>my-sonar</name>
-      <properties>
-        <hudson.tools.InstallSourceProperty>
-          <installers>
-            <hudson.plugins.sonar.SonarRunnerInstaller>
-              <id>4.3.0.2102</id>
-            </hudson.plugins.sonar.SonarRunnerInstaller>
-          </installers>
-        </hudson.tools.InstallSourceProperty>
-      </properties>
-    </hudson.plugins.sonar.SonarRunnerInstallation>
-  </installations>
-</hudson.plugins.sonar.SonarRunnerInstallation_-DescriptorImpl>" > /var/lib/jenkins/hudson.plugins.sonar.SonarRunnerInstallation.xml
 
 # Artifactory integration
-echo "<?xml version='1.1' encoding='UTF-8'?>
-<org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl plugin="artifactory@3.6.1">
-  <useCredentialsPlugin>false</useCredentialsPlugin>
-  <artifactoryServers>
-    <org.jfrog.hudson.ArtifactoryServer>
-      <url>https://10.10.10.10:8081</url>
-      <id>maven-rep</id>
-      <timeout>300</timeout>
-      <bypassProxy>false</bypassProxy>
-      <connectionRetry>3</connectionRetry>
-      <deploymentThreads>3</deploymentThreads>
-      <deployerCredentialsConfig>
-        <username>admin</username>
-        <password>-</password>
-        <credentialsId></credentialsId>
-        <overridingCredentials>false</overridingCredentials>
-        <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
-      </deployerCredentialsConfig>
-    </org.jfrog.hudson.ArtifactoryServer>
-  </artifactoryServers>
-</org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>" > /var/lib/jenkins/org.jfrog.hudson.ArtifactoryBuilder.xml
-
-exit;
-EOSU
 
 systemctl restart jenkins
