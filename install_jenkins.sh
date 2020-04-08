@@ -65,6 +65,8 @@ sonar \
 artifactory \
 locale \
 maven-plugin \
+ssh-agent \
+ssh-slaves \
 -restart
 
 # Remove jenkins cli
