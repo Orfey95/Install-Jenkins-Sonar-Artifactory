@@ -23,7 +23,9 @@ List of plugins:
 - sonar (for work with SonarQube);
 - artifactory (for work with Artifactory);
 - locale (for Jenkins localization);
-- maven-plugin (for work with Maven).
+- maven-plugin (for work with Maven);
+- ssh-agent (this plugin allows you to provide SSH credentials to builds via a ssh-agent in Jenkin);
+- ssh-slaves (provides a means to launch agents via SSH).
 ## Install Sonar(v7.9.1) with PostgreSQL on CentOS 7
 Script example:
 ```
