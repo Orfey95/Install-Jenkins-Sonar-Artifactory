@@ -102,12 +102,6 @@ LimitNPROC=4096
 WantedBy=multi-user.target
 EOF
 
-# Increase the limits
-echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
-echo "fs.file-max = 65536" >> /etc/sysctl.conf
-echo "sonar   -   nofile   65536" >> /etc/security/limits.d/99-sonarqube.conf
-echo "sonar   -   nproc    2048" >> /etc/security/limits.d/99-sonarqube.conf
-
 # Disable SELinux
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
 
@@ -123,7 +117,4 @@ password=$2
 name=$3
 email=$4
 curl -X POST -v -u admin:admin "http://localhost:9000/api/users/create?login=$login&password=$password&name=$name&email=$email"
-
-# Reboot
-reboot
 
