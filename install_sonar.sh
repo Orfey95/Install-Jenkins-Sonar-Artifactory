@@ -117,6 +117,13 @@ systemctl start sonar
 systemctl enable sonar
 systemctl status sonar
 
+# Create user
+login=$1
+password=$2
+name=$3
+email=$4
+curl -X POST -v -u admin:admin "http://localhost:9000/api/users/create?login=$login&password=$password&name=$name&email=$email"
+
 # Reboot
 reboot
 
