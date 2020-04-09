@@ -24,7 +24,6 @@ source /etc/profile
 yum install -y nano wget unzip
 
 # Install the PostgreSQL Repository
-#yum install -y https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
 yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
 # Install the PostgreSQL 10 database Server
