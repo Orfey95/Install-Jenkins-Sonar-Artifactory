@@ -111,7 +111,7 @@ systemctl start sonar
 systemctl enable sonar
 systemctl status sonar
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9000)" != "200" ]]; do sleep 1; done
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9000)" != "200" ]]; do echo "localhost:9000 is loading"; sleep 1; done
 
 # Create user
 login=$1
