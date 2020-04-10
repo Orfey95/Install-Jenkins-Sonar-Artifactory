@@ -111,12 +111,11 @@ systemctl start sonar
 systemctl enable sonar
 systemctl status sonar
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9000)" != "200" ]]; do echo "localhost:9000 is loading"; sleep 1; done
+# Increase the limits
+echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
+echo "fs.file-max = 65536" >> /etc/sysctl.conf
+echo "sonar   -   nofile   65536" >> /etc/security/limits.d/99-sonarqube.conf
+echo "sonar   -   nproc    2048" >> /etc/security/limits.d/99-sonarqube.conf
 
-# Create user
-login=$1
-password=$2
-name=$3
-email=$4
-curl -X POST -v -u admin:admin "http://localhost:9000/api/users/create?login=$login&password=$password&name=$name&email=$email"
-
+# Reboot
+reboot
