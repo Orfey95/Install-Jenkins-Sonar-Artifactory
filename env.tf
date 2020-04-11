@@ -61,7 +61,7 @@ resource "google_compute_address" "sonar-static-ip-address" {
 
 resource "google_compute_instance" "vm_instance_sonar" {
   name = "sonar-instance"
-  machine_type = "n1-standard-2"
+  machine_type = "n1-standard-1"
   
   tags = ["sonar"]
   
@@ -107,7 +107,7 @@ resource "google_compute_address" "artifactory-static-ip-address" {
 
 resource "google_compute_instance" "vm_instance_artifactory" {
   name = "artifactory-instance"
-  machine_type = "n1-standard-2"
+  machine_type = "n1-standard-1"
   
   tags = ["artifactory"]
   
