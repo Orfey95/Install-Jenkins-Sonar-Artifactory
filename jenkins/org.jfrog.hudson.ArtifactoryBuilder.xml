@@ -3,7 +3,7 @@
   <useCredentialsPlugin>true</useCredentialsPlugin>
   <artifactoryServers>
     <org.jfrog.hudson.ArtifactoryServer>
-      <url>https://replace_ip:8081</url>
+      <url>http://replace_ip:8081/artifactory</url>
       <id>replace_name</id>
       <timeout>300</timeout>
       <bypassProxy>false</bypassProxy>
