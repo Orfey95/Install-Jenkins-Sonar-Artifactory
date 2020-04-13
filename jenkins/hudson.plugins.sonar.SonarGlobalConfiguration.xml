@@ -4,7 +4,7 @@
   <installations>
     <hudson.plugins.sonar.SonarInstallation>
       <name>replace_name</name>
-      <serverUrl>https://replace_ip:9000</serverUrl>
+      <serverUrl>http://replace_ip:9000</serverUrl>
       <credentialsId></credentialsId>
       <webhookSecretId></webhookSecretId>
       <mojoVersion></mojoVersion>
