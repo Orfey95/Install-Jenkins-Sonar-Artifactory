@@ -91,7 +91,7 @@ Type=forking
 ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
 ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
 
-ExecStart=curl https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh | bash
+ExecStart=/home/vagrant/post_install_sonar.sh password
 
 User=sonar
 Group=sonar
