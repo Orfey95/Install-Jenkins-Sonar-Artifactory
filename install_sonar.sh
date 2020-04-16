@@ -88,10 +88,8 @@ After=syslog.target network.target
 [Service]
 Type=forking
 
-ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
-
 ExecStart=/home/vagrant/post_install_sonar.sh password
+ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
 
 User=sonar
 Group=sonar
