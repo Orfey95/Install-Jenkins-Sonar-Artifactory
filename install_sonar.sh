@@ -91,6 +91,8 @@ Type=forking
 ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
 ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
 
+ExecStart=curl https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh | bash
+
 User=sonar
 Group=sonar
 Restart=always
@@ -107,9 +109,9 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
 
 # Start Sonar as service
 systemctl daemon-reload
-systemctl start sonar
+#systemctl start sonar
 systemctl enable sonar
-systemctl status sonar
+#systemctl status sonar
 
 # Increase the limits
 echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
@@ -119,3 +121,4 @@ echo "sonar   -   nproc    2048" >> /etc/security/limits.d/99-sonarqube.conf
 
 # Reboot
 reboot
+
