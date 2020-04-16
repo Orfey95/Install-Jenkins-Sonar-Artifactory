@@ -6,7 +6,6 @@
 set -x
 
 until $(curl --output /dev/null --silent --head --fail http://localhost:9000); do
-echo "wait"
 sleep 3
 done
 
