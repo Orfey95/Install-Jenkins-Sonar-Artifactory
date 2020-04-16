@@ -6,10 +6,10 @@
 set -x
 
 # Create user
-#password=$1
+password=$1
 
-curl -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=password&previousPassword=admin'
+curl -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=$password&previousPassword=admin'
 
-sed -i 's/ExecStart=curl/\#ExecStart=curl/' /etc/systemd/system/sonar.service
+sed -i 's/ExecStart=/home/\#ExecStart=\/home/' /etc/systemd/system/sonar.service
 
 
