@@ -88,7 +88,7 @@ After=syslog.target network.target
 [Service]
 Type=forking
 
-ExecStart=/home/vagrant/post_install_sonar.sh password
+ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
 ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
 
 User=sonar
@@ -109,9 +109,9 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
 
 # Start Sonar as service
 systemctl daemon-reload
-#systemctl start sonar
+systemctl start sonar
 systemctl enable sonar
-#systemctl status sonar
+systemctl status sonar
 
 # Increase the limits
 echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
