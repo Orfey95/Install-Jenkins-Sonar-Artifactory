@@ -102,7 +102,10 @@ LimitNPROC=4096
 WantedBy=multi-user.target
 EOF
 
+password=$1
 wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh
+sed -i "s/replace_password/$password/" /home/vagrant/post_install_sonar.sh
+@reboot /home/vagrant/post_install_sonar.sh
 
 # Disable SELinux
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
