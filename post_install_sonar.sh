@@ -5,10 +5,12 @@
 # Turn on logging
 set -x
 
-# Create user
-password=$1
+until $(curl --output /dev/null --silent --head --fail http://localhost:9000); do
+echo "wait"
+sleep 3
+done
 
-curl -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=$password&previousPassword=admin'
+curl -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=replace_password&previousPassword=admin'
 
 
 
