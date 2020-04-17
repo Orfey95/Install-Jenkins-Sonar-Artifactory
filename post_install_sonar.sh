@@ -19,3 +19,5 @@ iptables -D INPUT -p tcp -s localhost --dport 9000 -j ACCEPT
 iptables -D INPUT -p tcp --dport 9000 -j DROP
 
 sed -i "s!@reboot root sleep 30 && ${HOME}/post_install_sonar.sh 2>&1 >> ${HOME}/log!!" /etc/crontab
+
+rm $0
