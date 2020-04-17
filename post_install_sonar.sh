@@ -9,7 +9,9 @@
 #sleep 3
 #done
 
-curl -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=replace_password&previousPassword=admin'
+#curl -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=replace_password&previousPassword=admin'
 
-
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=replace_password&previousPassword=admin')" != "204" ]]; 
+do sleep 5; 
+done
 
