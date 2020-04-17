@@ -5,7 +5,15 @@
 # Turn on logging
 set -x
 
+#Firewall on
+iptables -A INPUT -p tcp -s localhost --dport 9000 -j ACCEPT
+iptables -A INPUT -p tcp --dport 9000 -j DROP
+
+# API change admin password
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' -u admin:admin -X POST http://localhost:9000/api/users/change_password --data 'login=admin&password=replace_password&previousPassword=admin')" != "204" ]]; 
 do sleep 5; 
 done
 
+#Firewall off
+iptables -D INPUT -p tcp -s localhost --dport 9000 -j ACCEPT
+iptables -D INPUT -p tcp --dport 9000 -j DROP
