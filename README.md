@@ -29,6 +29,7 @@ List of plugins:
 ## Install Sonar(v7.9.1) with PostgreSQL on CentOS 7
 Script parameters:
 1) Admin password. Example: 12345678
+
 Script example:
 ```
 sasha@network:~$ sudo bash install_sonar.sh 12345678
