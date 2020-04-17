@@ -2,9 +2,6 @@
 
 # POSTInstall Sonar on Centos 7
 
-# Turn on logging
-set -x
-
 #Firewall on
 iptables -A INPUT -p tcp -s localhost --dport 9000 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9000 -j DROP
