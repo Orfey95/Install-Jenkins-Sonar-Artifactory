@@ -27,21 +27,11 @@ List of plugins:
 - ssh-agent (this plugin allows you to provide SSH credentials to builds via a ssh-agent in Jenkin);
 - ssh-slaves (provides a means to launch agents via SSH).
 ## Install Sonar(v7.9.1) with PostgreSQL on CentOS 7
-### Install Sonar<br>
-Script example:
-```
-sasha@network:~$ sudo bash install_sonar.sh
-```
-### Create Sonar user<br>
 Script parameters:
-1) User login. Example: sasha
-2) User password. Example: 1234
-3) User name. Example: sasha
-4) User email. Example: sasha@email.com
-
+1) User password. Example: 1234
 Script example:
 ```
-sasha@network:~$ sudo bash post_install_sonar.sh sasha 1234 sasha sasha@email.com
+sasha@network:~$ sudo bash install_sonar.sh password
 ```
 ## Install Artifactory on CentOS 7
 Script parameters:
