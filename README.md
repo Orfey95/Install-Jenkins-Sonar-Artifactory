@@ -28,10 +28,10 @@ List of plugins:
 - ssh-slaves (provides a means to launch agents via SSH).
 ## Install Sonar(v7.9.1) with PostgreSQL on CentOS 7
 Script parameters:
-1) User password. Example: 1234
+1) Admin password. Example: 12345678
 Script example:
 ```
-sasha@network:~$ sudo bash install_sonar.sh password
+sasha@network:~$ sudo bash install_sonar.sh 12345678
 ```
 ## Install Artifactory on CentOS 7
 Script parameters:
