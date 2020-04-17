@@ -29,7 +29,7 @@ if [[ $artifactory_status == "" ]]
 then
 echo "Artifactory is not installed"
 yum -y install jfrog-artifactory-oss wget
-else echo "Java is already installed"
+else echo "Artifactory is already installed"
 fi
 
 # Start Artifactory
