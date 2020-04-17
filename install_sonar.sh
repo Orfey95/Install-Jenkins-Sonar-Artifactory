@@ -105,7 +105,7 @@ EOF
 password=$1
 wget -P $HOME https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh
 sed -i "s/replace_password/$password/" $HOME/post_install_sonar.sh
-echo "@reboot root sleep 30 && ${HOME}/post_install_sonar.sh 2>&1 >> ${HOME}/log" >> /etc/crontab
+echo "@reboot root sleep 30 && ${HOME}/post_install_sonar.sh 2>&1" >> /etc/crontab
 chmod 774 ${HOME}/post_install_sonar.sh
 
 # Disable SELinux
