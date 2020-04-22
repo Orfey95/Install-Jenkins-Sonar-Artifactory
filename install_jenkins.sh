@@ -11,7 +11,7 @@ if [[ $java_status == "" ]]
 then
 echo "Java is not installed"
 apt update
-apt install -y openjdk-8-jdk openjdk-8-jre-headless
+apt install -y openjdk-8-jdk
 else echo "Java is already installed"
 fi
 
