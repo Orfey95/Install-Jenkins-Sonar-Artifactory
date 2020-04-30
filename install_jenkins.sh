@@ -26,9 +26,9 @@ if ! dpkg -l | grep jenkins; then
 	wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 	sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 	apt update
-	apt install -y jenkins=$jenkins_LTS
-	systemctl start jenkins
+	apt install -y jenkins=$jenkins_LTS	
 	systemctl enable jenkins
+	systemctl start jenkins
 	systemctl status jenkins
 else 
 	echo "Jenkins is already installed"
