@@ -112,8 +112,8 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
 
 # Start Sonar as service
 systemctl daemon-reload
-systemctl start sonar
 systemctl enable sonar
+systemctl start sonar
 systemctl status sonar
 
 # Increase the limits
