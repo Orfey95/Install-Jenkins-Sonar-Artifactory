@@ -6,12 +6,11 @@
 set -x
 
 # Check Java
-java_status=$(sudo rpm -qa | grep java)
-if [[ $java_status == "" ]]
-then
-echo "Java is not installed"
-yum install -y java-11-openjdk-devel
-else echo "Java is already installed"
+if ! rpm -qa | grep java; then
+	echo "Java is not installed"
+	yum install -y java-11-openjdk-devel
+else 
+	echo "Java is already installed"
 fi
 
 # Set JAVA_HOME
@@ -24,12 +23,11 @@ source /etc/profile
 curl -sL https://bintray.com/jfrog/artifactory-rpms/rpm | tee /etc/yum.repos.d/bintray-jfrog-artifactory-rpms.repo
 
 # Install Artifactory
-artifactory_status=$(sudo rpm -qa | grep artifactory)
-if [[ $artifactory_status == "" ]]
-then
-echo "Artifactory is not installed"
-yum -y install jfrog-artifactory-oss wget
-else echo "Artifactory is already installed"
+if ! rpm -qa | grep artifactory; then
+	echo "Artifactory is not installed"
+	yum -y install jfrog-artifactory-oss wget
+else 
+	echo "Artifactory is already installed"
 fi
 
 # Start Artifactory
