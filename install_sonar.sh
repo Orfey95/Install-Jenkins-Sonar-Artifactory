@@ -6,12 +6,11 @@
 set -x
 
 # Check Java
-java_status=$(sudo rpm -qa | grep java)
-if [[ $java_status == "" ]]
-then
-echo "Java is not installed"
-yum install -y java-11-openjdk-devel
-else echo "Java is already installed"
+if ! rpm -qa | grep java; then
+	echo "Java is not installed"
+	yum install -y java-11-openjdk-devel
+else 
+	echo "Java is already installed"
 fi
 
 # Set JAVA_HOME
