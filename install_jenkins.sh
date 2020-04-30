@@ -11,7 +11,7 @@ if ! dpkg -l | grep java; then
 	apt update
 	apt install -y openjdk-8-jdk
 else 
-e	cho "Java is already installed"
+	echo "Java is already installed"
 fi
 
 # Install Jenkins
