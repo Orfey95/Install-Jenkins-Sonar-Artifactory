@@ -19,14 +19,13 @@ if ! dpkg -l | grep jenkins; then
 	echo "Jenkins is not installed"
 	jenkins_LTS=$1
 	if [ $# == 0 ]; then
-		echo 
-		"You forgot to enter LTS version"
+		echo "You forgot to enter LTS version"
 		exit 1
 	fi
 	wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 	sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 	apt update
-	apt install -y jenkins=$jenkins_LTS	
+	apt install -y jenkins="$jenkins_LTS"	
 	systemctl enable jenkins
 	systemctl start jenkins
 	systemctl status jenkins
@@ -43,15 +42,14 @@ if [ $# != 7 ]; then
 fi
 echo "Admin login will be: $admin_login"
 echo "Admin password will be: $admin_password"
-test -f $HOME/jenkins-cli.jar
-if [ $? == 1 ]; then
-	wget --retry-connrefused --waitretry=10 --read-timeout=10 --timeout=10 -t 0 --retry-on-http-error=503 -P $HOME http://localhost:8080/jnlpJars/jenkins-cli.jar
+if ! test -f "$HOME"/jenkins-cli.jar; then
+	wget --retry-connrefused --waitretry=10 --read-timeout=10 --timeout=10 -t 0 --retry-on-http-error=503 -P "$HOME" http://localhost:8080/jnlpJars/jenkins-cli.jar
 fi
 temp_pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
-echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080" -auth admin:$temp_pass -noKeyAuth groovy = –
+echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar "$HOME"/jenkins-cli.jar -s "http://localhost:8080" -auth admin:"$temp_pass" -noKeyAuth groovy = –
 
 # Install Jenkins plugins: Role-Based, Git, Pipeline, BlueOcean, BackUp, SonarQube, Artifactory
-java -jar $HOME/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:$temp_pass install-plugin \
+java -jar "$HOME"/jenkins-cli.jar -s "http://localhost:8080/" -auth admin:"$temp_pass" install-plugin \
 role-strategy \
 git \
 workflow-aggregator \
@@ -66,7 +64,7 @@ ssh-slaves \
 -restart
 
 # Remove jenkins cli
-rm $HOME/jenkins-cli.jar
+rm "$HOME"/jenkins-cli.jar
 
 # Integration Sonar and Artifactory
 #Variables
