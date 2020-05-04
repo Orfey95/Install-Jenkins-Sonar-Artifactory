@@ -65,7 +65,7 @@ ssh-slaves \
 rm "$HOME"/jenkins-cli.jar
 
 # Integration Sonar and Artifactory
-#Variables
+# Variables
 sonar_ip=$4
 sonar_name=$5
 artifactory_ip=$6
