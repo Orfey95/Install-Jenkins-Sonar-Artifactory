@@ -2,8 +2,7 @@
 
 # Install Sonar on Centos 7
 
-# Turn on logging
-set -x
+set -xe
 
 # Variables
 password=$1
@@ -98,10 +97,10 @@ LimitNPROC=4096
 WantedBy=multi-user.target
 EOF
 
-wget -P $HOME https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh
-sed -i "s/replace_password/$password/" $HOME/post_install_sonar.sh
-echo "@reboot root sleep 30 && ${HOME}/post_install_sonar.sh 2>&1" >> /etc/crontab
-chmod 774 ${HOME}/post_install_sonar.sh
+wget -P "$HOME" https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh
+sed -i "s/replace_password/$password/" "$HOME"/post_install_sonar.sh
+echo "@reboot root sleep 30 && $HOME/post_install_sonar.sh 2>&1" >> /etc/crontab
+chmod 774 "$HOME"/post_install_sonar.sh
 
 # Disable SELinux
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
