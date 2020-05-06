@@ -27,7 +27,6 @@ else
 fi
 
 # Start Artifactory
-systemctl enable artifactory
 systemctl start artifactory
 systemctl status artifactory
 
