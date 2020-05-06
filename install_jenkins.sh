@@ -2,8 +2,17 @@
 
 # Install Jenkins on Ubuntu 18.04
 
-# Turn on logging
-set -x
+set -xe
+
+# Variables
+jenkins_LTS=$1
+admin_login=$2
+admin_password=$3
+sonar_ip=$4
+sonar_name=$5
+artifactory_ip=$6
+artifactory_name=$7
+HTTP_CODE_503=503
 
 # Check parameters
 if [ $# != 7 ]; then
@@ -22,8 +31,7 @@ fi
 
 # Install Jenkins
 if ! dpkg -l | grep jenkins; then
-	echo "Jenkins is not installed"
-	jenkins_LTS=$1
+	echo "Jenkins is not installed"	
 	wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 	sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 	apt update
@@ -36,12 +44,10 @@ else
 fi
 
 # Create admin user
-admin_login=$2
-admin_password=$3
 echo "Admin login will be: $admin_login"
 echo "Admin password will be: $admin_password"
 if ! test -f "$HOME"/jenkins-cli.jar; then
-	wget --retry-connrefused --waitretry=10 --read-timeout=10 --timeout=10 -t 0 --retry-on-http-error=503 -P "$HOME" http://localhost:8080/jnlpJars/jenkins-cli.jar
+	wget --retry-connrefused --waitretry=10 --read-timeout=10 --timeout=10 -t 0 --retry-on-http-error="$HTTP_CODE_503" -P "$HOME" http://localhost:8080/jnlpJars/jenkins-cli.jar
 fi
 temp_pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
 echo "jenkins.model.Jenkins.instance.securityRealm.createAccount('$admin_login', '$admin_password')" | java -jar "$HOME"/jenkins-cli.jar -s "http://localhost:8080" -auth admin:"$temp_pass" -noKeyAuth groovy = –
@@ -65,11 +71,6 @@ ssh-slaves \
 rm "$HOME"/jenkins-cli.jar
 
 # Integration Sonar and Artifactory
-# Variables
-sonar_ip=$4
-sonar_name=$5
-artifactory_ip=$6
-artifactory_name=$7
 
 rm /var/lib/jenkins/config.xml
 wget https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/jenkins/config.xml -P /var/lib/jenkins
