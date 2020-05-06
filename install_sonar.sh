@@ -5,6 +5,9 @@
 # Turn on logging
 set -x
 
+# Variables
+password=$1
+
 # Check Java
 if ! rpm -qa | grep java; then
 	echo "Java is not installed"
@@ -12,12 +15,6 @@ if ! rpm -qa | grep java; then
 else 
 	echo "Java is already installed"
 fi
-
-# Set JAVA_HOME
-echo "export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))" >> /etc/profile
-echo "export PATH=$PATH:$JAVA_HOME/bin" >> /etc/profile
-echo "export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar" >> /etc/profile
-source /etc/profile
 
 # Install support packages
 yum install -y nano wget unzip
@@ -101,7 +98,6 @@ LimitNPROC=4096
 WantedBy=multi-user.target
 EOF
 
-password=$1
 wget -P $HOME https://raw.githubusercontent.com/Orfey95/Install-Jenkins-Sonar-Artifactory/master/post_install_sonar.sh
 sed -i "s/replace_password/$password/" $HOME/post_install_sonar.sh
 echo "@reboot root sleep 30 && ${HOME}/post_install_sonar.sh 2>&1" >> /etc/crontab
@@ -124,4 +120,3 @@ echo "sonar   -   nproc    2048" >> /etc/security/limits.d/99-sonarqube.conf
 
 # Reboot
 reboot
-
