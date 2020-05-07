@@ -13,11 +13,12 @@ sonar_name=$5
 artifactory_ip=$6
 artifactory_name=$7
 HTTP_CODE_503=503
+PARAMETER_ERROR=1
 
 # Check parameters
 if [ $# != 7 ]; then
 	echo "You forgot to enter script parameters"
-	exit 1
+	exit $PARAMETER_ERROR
 fi
 
 # Check Java
