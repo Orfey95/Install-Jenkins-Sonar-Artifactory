@@ -1,6 +1,6 @@
 provider "google" {
-  credentials = "${file("top-script-272714-2bcdbfb8d2be.json")}"
-  project = "top-script-272714"
+  credentials = "${file("bash-task-346afa48839d.json")}"
+  project = "bash-task"
   region = "europe-west3"
   zone = "europe-west3-a"
 }
@@ -23,7 +23,8 @@ resource "google_compute_instance" "vm_instance_jenkins" {
 	}
   }
 
-  metadata_startup_script = "sudo apt update"
+  metadata_startup_script = "apt update" 
+	
   
   network_interface {
     network = "default"
@@ -71,6 +72,8 @@ resource "google_compute_instance" "vm_instance_sonar" {
 	}
   }
   
+  metadata_startup_script = "yum install -y wget"
+  
   network_interface {
     network = "default"
     access_config {
@@ -116,6 +119,8 @@ resource "google_compute_instance" "vm_instance_artifactory" {
 	  image = "centos-cloud/centos-7"
 	}
   }
+  
+  metadata_startup_script = "yum install -y wget"
   
   network_interface {
     network = "default"
