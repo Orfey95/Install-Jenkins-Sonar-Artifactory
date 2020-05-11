@@ -66,6 +66,8 @@ locale \
 maven-plugin \
 ssh-agent \
 ssh-slaves \
+email-ext \
+gitlab-plugin \
 -restart
 
 # Remove jenkins cli
