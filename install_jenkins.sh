@@ -70,6 +70,7 @@ email-ext \
 gitlab-plugin \
 build-name-setter \
 copyartifact \
+pipeline-utility-steps \
 -restart
 
 # Remove jenkins cli
