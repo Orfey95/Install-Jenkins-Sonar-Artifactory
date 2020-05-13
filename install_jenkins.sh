@@ -68,6 +68,7 @@ ssh-agent \
 ssh-slaves \
 email-ext \
 gitlab-plugin \
+build-name-setter \
 -restart
 
 # Remove jenkins cli
