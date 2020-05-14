@@ -71,7 +71,7 @@ gitlab-plugin \
 build-name-setter \
 copyartifact \
 pipeline-utility-steps \
-read-only-configurations \
+extended-read-permission \
 -restart
 
 # Remove jenkins cli
