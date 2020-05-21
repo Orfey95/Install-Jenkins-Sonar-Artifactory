@@ -72,6 +72,7 @@ build-name-setter \
 copyartifact \
 pipeline-utility-steps \
 extended-read-permission \
+git-parameter \
 -restart
 
 # Remove jenkins cli
