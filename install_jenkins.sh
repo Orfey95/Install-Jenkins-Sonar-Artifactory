@@ -73,6 +73,7 @@ copyartifact \
 pipeline-utility-steps \
 extended-read-permission \
 git-parameter \
+parameterized-trigger \
 -restart
 
 # Remove jenkins cli
