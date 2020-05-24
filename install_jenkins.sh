@@ -74,6 +74,7 @@ pipeline-utility-steps \
 extended-read-permission \
 git-parameter \
 parameterized-trigger \
+hashicorp-vault-pipeline \
 -restart
 
 # Remove jenkins cli
