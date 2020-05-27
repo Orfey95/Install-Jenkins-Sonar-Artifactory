@@ -75,6 +75,7 @@ extended-read-permission \
 git-parameter \
 parameterized-trigger \
 hashicorp-vault-pipeline \
+jobConfigHistory \
 -restart
 
 # Remove jenkins cli
